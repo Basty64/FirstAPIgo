@@ -18,4 +18,6 @@ func main() {
 
 	a := Circle{2, 3, 5}
 	a.square()
+
+	hello()
 }
