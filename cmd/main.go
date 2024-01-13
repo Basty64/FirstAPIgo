@@ -1,23 +1,15 @@
 package main
 
-import "fmt"
-
-type Circle struct {
-	x, y, r int
-}
-
-func (c *Circle) square() int {
-	sq := c.x * c.y * c.r
-	fmt.Println(sq)
-	return sq
-}
+import (
+	"MyFirstAPIgo/internal/entities"
+	"log"
+)
 
 func main() {
-	c := Circle{1, 2, 3}
-	c.square()
 
-	a := Circle{2, 3, 5}
-	a.square()
+	server := new(entities.Server)
+	if err := server.Run("localhost:8080"); err != nil {
+		log.Fatalf("error: %s", err)
+	}
 
-	hello()
 }
