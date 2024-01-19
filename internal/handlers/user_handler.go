@@ -20,7 +20,6 @@ func (handler *GETUsersHandler) ServeHTTP(writer http.ResponseWriter, request *h
 	users, err := handler.useCase.Handle(request.Context(), usecase.FindUserQuery{Name: name})
 	if errors.Is(err, pkg.ErrInfraction) {
 		http.Error(writer, err.Error(), http.StatusUnprocessableEntity)
-
 		return
 	}
 	if err != nil {
