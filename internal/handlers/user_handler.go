@@ -30,3 +30,8 @@ func (handler *GETUsersHandler) ServeHTTP(writer http.ResponseWriter, request *h
 		// TODO
 	}
 }
+
+type POSTUserRequest struct {
+	Name     string `json:"name"`
+	Password string `json:"password"`
+}
