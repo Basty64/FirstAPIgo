@@ -1,6 +1,7 @@
 package domain
 
 import (
+	"context"
 	"github.com/gofrs/uuid"
 )
 
@@ -39,4 +40,14 @@ func NewUser(name string, email string, passwordHash []byte) *User {
 		email:    email,
 		password: passwordHash,
 	}
+}
+
+func (u *User) Update(name string) {
+	u.name = name
+}
+
+type UserRepository interface {
+	Save(ctx context.Context, user *User) error
+	FindByName(ctx context.Context, name string) (*User, error)
+	// FindByParameters(ctx context.Context, parameters UserSearchParameters) ([]*User, error)
 }

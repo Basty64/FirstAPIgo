@@ -2,13 +2,13 @@ package postgres
 
 import (
 	"MyFirstAPIgo/internal/domain"
-	"MyFirstAPIgo/internal/repository"
+	"MyFirstAPIgo/internal/pkg"
 	"context"
 	"fmt"
 )
 
 type RepositoryUser struct {
-	connection repository.Connection
+	connection pkg.Connection
 }
 
 func (r *RepositoryUser) Save(ctx context.Context, user *domain.User) error {
