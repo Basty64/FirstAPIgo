@@ -45,6 +45,7 @@ func (response *POSTBillResponse) MarshalJSON() ([]byte, error) {
 
 func (handler *POSTBillsHandler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 	userID := middleware.UserIDFromContext(request.Context())
+
 	var body POSTBillRequest
 	err := json.NewDecoder(request.Body).Decode(&body)
 	if err != nil {
@@ -70,6 +71,7 @@ func (handler *POSTBillsHandler) ServeHTTP(writer http.ResponseWriter, request *
 
 	response := &POSTBillResponse{
 		id:       bill.ID(),
+
 		isOpened: !bill.IsClosed(),
 		userID:   bill.UserID,
 	}

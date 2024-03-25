@@ -11,7 +11,9 @@ import (
 
 type Server struct {
 	httpServer *http.Server
+	handler    http.Handler
 }
+
 
 func NewServer(ctx context.Context, addr string, postgresConnection string) (*Server, error) {
 	router := mux.NewRouter()
@@ -20,6 +22,7 @@ func NewServer(ctx context.Context, addr string, postgresConnection string) (*Se
 	//if err != nil {
 	//	return nil, err
 	//}
+
 
 	billRepository := inmemory.NewBillRepository()
 	createBills := usecase.CreateNewBillUseCase(billRepository)

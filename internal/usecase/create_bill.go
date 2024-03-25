@@ -10,7 +10,9 @@ type CreateBillUseCase struct {
 	billRepository domain.BillRepository
 }
 
+
 func CreateNewBillUseCase(billRepository domain.BillRepository) *CreateBillUseCase {
+
 	return &CreateBillUseCase{
 		billRepository: billRepository,
 	}
