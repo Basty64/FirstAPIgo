@@ -1,7 +1,0 @@
-POST http://localhost:8080/api/tokens
-Content-Type: application/json
-
-{
-  "name": "new user",
-  "password": "password"
-}

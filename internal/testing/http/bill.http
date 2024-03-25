@@ -1,0 +1,10 @@
+POST http://localhost:8080/api/bill
+Content-Type: application/json
+
+{
+  "id": "3984",
+  "UserID":   1003984,
+  "balance":  0,
+  "isClosed": false,
+  "password": "password"
+}

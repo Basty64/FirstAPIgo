@@ -1,27 +1,38 @@
 package entities
 
 import (
+	"MyFirstAPIgo/internal/handlers"
+	"MyFirstAPIgo/internal/repository/inmemory"
+	"MyFirstAPIgo/internal/usecase"
 	"context"
+	"github.com/gorilla/mux"
 	"net/http"
 )
 
 type Server struct {
 	httpServer *http.Server
-	handler    http.Handler
 }
 
-//func NewServer() *Server {
-//	return &Server{httpServer: httpServer, handler: handler}
-//}
+func NewServer(ctx context.Context, addr string, postgresConnection string) (*Server, error) {
+	router := mux.NewRouter()
 
-func (s *Server) Run(port string) error {
+	//pgxPool, err := pgxpool.New(ctx, postgresConnection)
+	//if err != nil {
+	//	return nil, err
+	//}
 
-	err := http.ListenAndServe(port, s.handler)
-	if err != nil {
-		return err
-	}
-	return nil
+	billRepository := inmemory.NewBillRepository()
+	createBills := usecase.CreateNewBillUseCase(billRepository)
 
+	router.Handle("/api/bill", handlers.NewPOSTBillsHandler(createBills))
+
+	httpServer := &http.Server{Addr: addr, Handler: router}
+
+	return &Server{httpServer: httpServer}, nil
+}
+
+func (s *Server) Run() error {
+	return s.httpServer.ListenAndServe()
 }
 
 func (s *Server) Shutdown(ctx context.Context) error {
