@@ -9,6 +9,14 @@ import (
 
 type RepositoryUser struct {
 	connection pkg.Connection
+
+}
+
+func NewUserRepository(connection pkg.Connection) *RepositoryUser {
+	return &RepositoryUser{
+		connection: connection,
+	}
+
 }
 
 func (r *RepositoryUser) Save(ctx context.Context, user *domain.User) error {

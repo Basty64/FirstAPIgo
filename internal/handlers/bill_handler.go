@@ -71,7 +71,7 @@ func (handler *POSTBillsHandler) ServeHTTP(writer http.ResponseWriter, request *
 
 	response := &POSTBillResponse{
 		id:       bill.ID(),
-		name:     bill.Name(),
+
 		isOpened: !bill.IsClosed(),
 		userID:   bill.UserID,
 	}

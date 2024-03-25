@@ -22,12 +22,11 @@ func (handler *GETUsersHandler) ServeHTTP(writer http.ResponseWriter, request *h
 		http.Error(writer, err.Error(), http.StatusUnprocessableEntity)
 		return
 	}
-	if err != nil {
-		// TODO
-	}
 
 	if err := json.NewEncoder(writer).Encode(users); err != nil {
-		// TODO
+		http.Error(writer, err.Error(), http.StatusBadRequest)
+
+		return
 	}
 }
 

@@ -3,10 +3,14 @@ package middleware
 import (
 	"context"
 	"github.com/gofrs/uuid"
-	"net/http"
+
 )
 
 type authKey struct{}
+
+
+func UserIDFromContext(ctx context.Context) uuid.UUID {
+	userID, _ := ctx.Value(authKey{}).(uuid.UUID)
 
 func AuthMiddleware(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
